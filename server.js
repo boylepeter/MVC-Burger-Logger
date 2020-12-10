@@ -1,4 +1,8 @@
 const mysql = require("mysql");
+const express = require("express");
+const app = express();
+
+const PORT = process.env.PORT || 8080;
 
 let connection;
 
@@ -17,5 +21,12 @@ connection = mysql.createConnection({
 connection.connect(function(err){
     if (err) throw err;
     console.log("CONNECTED...");
-    connection.end();
+});
+
+app.get("/", function(req, res){
+    res.send("Connected...")
+});
+
+app.listen(PORT, function(){
+    console.log("You've connected at http://localhost:" + PORT)
 });
