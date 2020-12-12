@@ -20,6 +20,7 @@
   "homepage": "https://github.com/boylepeter/MVC-Burger-Logger#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-handlebars": "^3.0.0",
     "mysql": "^2.18.1"
   }
 }
