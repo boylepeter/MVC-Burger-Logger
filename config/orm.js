@@ -1,5 +1,5 @@
 // Import MySQL connection.
-var connection = require("../config/connection");
+var connection = require("../config/connection.js");
 
 // Helper function for SQL syntax.
 // Let's say we want to pass 3 values into the mySQL query.
@@ -41,8 +41,8 @@ function objToSql(ob) {
 
 // Object for all our SQL statement functions.
 var orm = {
-  all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
+  selectAll: function(tableInput, cb) {
+    var queryString = "SELECT * FROM burgers;";
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -50,8 +50,8 @@ var orm = {
       cb(result);
     });
   },
-  create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
+  insertOne: function(cols, vals, cb) {
+    var queryString = "INSERT INTO burgers ";
 
     queryString += " (";
     queryString += cols.toString();
@@ -71,8 +71,8 @@ var orm = {
     });
   },
   // An example of objColVals would be {name: panther, sleepy: true}
-  update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
+  updateOne: function(objColVals, condition, cb) {
+    var queryString = "UPDATE burgers ";
 
     queryString += " SET ";
     queryString += objToSql(objColVals);
@@ -88,8 +88,8 @@ var orm = {
       cb(result);
     });
   },
-  delete: function(table, condition, cb) {
-    var queryString = "DELETE FROM " + table;
+  delete: function(condition, cb) {
+    var queryString = "DELETE FROM burgers ";
     queryString += " WHERE ";
     queryString += condition;
 
@@ -105,9 +105,5 @@ var orm = {
 
 // Export the orm object for the model (cat.js).
 module.exports = orm;
-
-// * `selectAll()`
-// * `insertOne()`
-// * `updateOne()`
 
 
