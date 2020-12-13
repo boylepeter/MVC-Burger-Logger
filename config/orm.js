@@ -1,15 +1,14 @@
-//Need to require connection.js so that the ORM can communicate/talk with the database.
-const connection = require("./connection.js");
+var connection = require("../config/connection.js");
 
 // Helper function for SQL syntax.
 // Let's say we want to pass 3 values into the mySQL query.
 // In order to write the query, we need 3 question marks.
 // The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
 // ["?", "?", "?"].toString() => "?,?,?";
-let printQuestionMarks = (num) => {
-    let arr = [];
+function printQuestionMarks(num) {
+    var arr = [];
 
-    for (let i = 0; i < num; i++) {
+    for (var i = 0; i < num; i++) {
         arr.push("?");
     }
 
@@ -17,12 +16,12 @@ let printQuestionMarks = (num) => {
 }
 
 // Helper function to convert object key/value pairs to SQL syntax
-let objToSql = (ob) => {
-    let arr = [];
+function objToSql(ob) {
+    var arr = [];
 
     // loop through the keys and push the key/value as a string int arr
-    for (let key in ob) {
-        let value = ob[key];
+    for (var key in ob) {
+        var value = ob[key];
         // check to skip hidden properties
         if (Object.hasOwnProperty.call(ob, key)) {
             // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
@@ -39,25 +38,19 @@ let objToSql = (ob) => {
     return arr.toString();
 }
 
-
-//Object for all our SQL statement functions.
-//Create the methods that will execute the necessary MySQL commands in the controllers.
-//These are the methods you will need to use in order to retrieve and store data in your database.
-let orm = {
-    //Select all function/query
-    selectAll: (tableInput, cb) => {
-        let queryString = "SELECT * FROM " + tableInput + ";";
-        connection.query(queryString, (err, result) => {
+// Object for all our SQL statement functions.
+var orm = {
+    selectAll: function (tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }
             cb(result);
         });
     },
-
-    //Create function/query
-    insertOne: (table, cols, vals, cb) => {
-        let queryString = "INSERT INTO " + table;
+    insertOne: function (table, cols, vals, cb) {
+        var queryString = "INSERT INTO " + table;
 
         queryString += " (";
         queryString += cols.toString();
@@ -68,18 +61,17 @@ let orm = {
 
         console.log(queryString);
 
-        connection.query(queryString, vals, (err, result) => {
+        connection.query(queryString, vals, function (err, result) {
             if (err) {
                 throw err;
             }
+
             cb(result);
         });
     },
-
-    //Update function/query.
     // An example of objColVals would be {name: panther, sleepy: true}
-    updateOne: (table, objColVals, condition, cb) => {
-        let queryString = "UPDATE " + table;
+    updateOne: function (table, objColVals, condition, cb) {
+        var queryString = "UPDATE " + table;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);
@@ -87,29 +79,13 @@ let orm = {
         queryString += condition;
 
         console.log(queryString);
-        connection.query(queryString, (err, result) => {
+        connection.query(queryString, function (err, result) {
             if (err) {
                 throw err;
             }
+
             cb(result);
         });
     },
-
-    //Delete function/query
-    delete: (table, condition, cb) => {
-        let queryString = "DELETE FROM " + table;
-        queryString += " WHERE ";
-        queryString += condition;
-
-        connection.query(queryString, (err, result) => {
-            if (err) {
-                throw err;
-            }
-            cb(result);
-        });
-    }
 };
-
-//Export the orm object.
 module.exports = orm;
-
