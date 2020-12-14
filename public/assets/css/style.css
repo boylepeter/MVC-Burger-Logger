@@ -4,6 +4,8 @@ li {
   background: black;
   color: white;
   text-align: center;
+  width:auto;
+  box-sizing: border-box;
 }
 
 .label {
@@ -17,6 +19,8 @@ li {
   color: white;
   background: black;
   text-align: center;
+  width:auto;
+  box-sizing: border-box;
 }
 
 .form-group {
