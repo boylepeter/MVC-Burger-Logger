@@ -13,6 +13,7 @@ var burger = {
       cb(res);
     });
   },
+  //condition is added to update to change the state of the burger
   updateOne: function(objColVals, condition, cb) {
     orm.updateOne("burgers", objColVals, condition, function(res) {
       cb(res);
@@ -20,5 +21,5 @@ var burger = {
   },
 };
 
-// Export the database functions for the controller (catsController.js).
+// Export the database functions for the controller (burgers_controller.js).
 module.exports = burger;
