@@ -2,7 +2,7 @@
 # Burger Logger
 
 ## Description: 
-Tasked with providing an app which could keep track of different burgers the user has had, and wants to try, we utilized javascript, express.js, express-handlebars, node, as well as mysql. We have created an app that is fun and easy to use and should fit the outlined requirements.
+Tasked with providing an app which could keep track of different burgers the user has had, and wants to try, we utilized javascript, express.js, express-handlebars, node, as well as mysql. We have created an app that is fun and easy to use and should fit the outlined requirements. The code contained in this repo was largely provided by and worked on in class and does not solely originate with the owner.
 ## Table of Contents
 
 -[Description](#description)
@@ -41,6 +41,7 @@ Our app is pretty simple, you are presented with a list of burgers that the user
 Email: [Boyle.Peter614@gmail.com](Boyle.Peter614@gmail.com)
 
 ### Contributors: 
+The code contained in this repo was largely provided by and worked on in class and does not solely originate with the owner. 
 Please feel free to get in contact if you would like to add on or collaborate.
 
 ### Tests: 
